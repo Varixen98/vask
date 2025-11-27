@@ -2,13 +2,13 @@
 
 use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Termwind\Components\Raw;
 
-Route::get('/', function () {
-    return view('homepage.index');
-})->name('homepage');
+Route::get('/', [HomeController::class, 'viewHomepage'])->name('homepage');
+
 
 Route::get('/about', function () {
     return view('about.about');

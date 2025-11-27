@@ -1,6 +1,6 @@
 @extends('layout.layout')
 
-@section('title', 'Totebag {{}}')
+@section('title', 'Totebag {{$totebag->name}}')
 
 @section('content')
     {{-- <main class="flex flex-col w-full h-auto mx-auto gap-10">

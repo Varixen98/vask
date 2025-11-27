@@ -16,7 +16,7 @@
         <div class="w-full flex p-2">
             <div class="grid grid-cols-3 gap-10 w-full justify-center items-center">
                 @foreach ($totebags as $totebag)
-                    <div class="w-[70%] h-fit flex flex-col gap-2 mx-auto rounded-md border-2 border-gray-300 hover:border-blue-500 shadow-2xl">
+                    <div id="card-{{$totebag->id}}" class="w-[70%] h-fit flex flex-col gap-2 mx-auto rounded-md border-2 border-gray-300 hover:border-blue-500 shadow-2xl">
                         <img src="{{$totebag->image_url}}" alt="" class="w-full h-[200px]">
                         <div class="w-full flex flex-col items-center justify-center p-2 gap-2">
                             <h4 class="text-center font-roboto font-bold">{{$totebag->item_name}}</h4>
