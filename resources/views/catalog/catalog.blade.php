@@ -3,53 +3,58 @@
 @section('title', 'catalog')
 
 @section('content')
-    <main class="flex flex-col w-full h-auto mx-auto gap-10">
-        {{-- hero section --}}
-        <div class="flex w-full h-[700px] gap-0 p-2 bg-center bg-cover" style="background-image: url({{asset('images/bg3.png')}})">
-            <div class="w-1/2 flex flex-col p-5 justify-center items-center gap-2">
-                <h2 class="font-roboto font-bold text-7xl">Catalog</h2>
-                <p class="font-roboto w-[400px] text-center">Feel free the browse our tote bag collection!
-                </p>
-            </div>
-        </div>
+    <main class="flex flex-col w-full items-center justify-center h-auto mx-auto gap-10">
+        
+        {{-- slider section --}}
+        <div id="catalog-section" class="flex flex-col gap-4 items-center justify-center w-full mx-auto mt-35 p-4">
+            <div id="slides-container" class="flex flex-col w-[85%] gap-4 p-4 items-center justify-center">
 
-        <div class="w-full flex p-2">
-            <div class="grid grid-cols-3 gap-10 w-full justify-center items-center">
+
+                {{-- ide slider nanti dulu --}}
+                {{-- <div id="slides-inner" class="flex w-full relative overflow-visible">
+                    <div id="slide" class="bg-red-500 text-9xl font-bold font-roboto w-full">1</div>
+                    <div id="slide" class="bg-sky-500 text-9xl font-bold font-robot w-full">2</div>
+                    <div id="slide" class="bg-amber-500 text-9xl font-bold font-robot w-full">3</div>
+                    <div id="slide" class="bg-emerald-500 text-9xl font-bold font-robot w-full">4</div>
+                    <div id="slide" class="bg-neutral-500 text-9xl font-bold font-robot w-full">5</div>
+                    <div id="slide" class="bg-pink-500 text-9xl font-bold font-robot w-full">6</div>
+                    <div id="slide" class="bg-red-500 text-9xl font-bold font-robot w-full">7</div>
+                    <div id="slide" class="bg-yellow-500 text-9xl font-bold font-robot w-full">8</div>
+                    <div id="slide" class="bg-blue-500 text-9xl font-bold font-robot w-full">9</div>
+                </div> --}}
+
                 @foreach ($totebags as $totebag)
-                    <div id="card-{{$totebag->id}}" class="w-[70%] h-fit flex flex-col gap-2 mx-auto rounded-md border-2 border-gray-300 hover:border-blue-500 shadow-2xl">
-                        <img src="{{$totebag->image_url}}" alt="" class="w-full h-[200px]">
-                        <div class="w-full flex flex-col items-center justify-center p-2 gap-2">
-                            <h4 class="text-center font-roboto font-bold">{{$totebag->item_name}}</h4>
-                            {{-- <p class="font-roboto text-xs w-[85%]">{{$totebag->description}}</p> --}}
+                    {{-- slider card --}}
 
-                            <div class="w-full flex gap-2 p-1 justify-center items-center">
+                    <div id="card" class="border w-full h-fit grid grid-cols-2 rounded-4xl">
+                        <img class="w-full rounded-l-4xl" src="{{$totebag->image_url}}" alt="tote img">
+
+                        <div class="flex flex-col items-start justify-center gap-2 p-2 ">
+                            <h3 class="font-roboto font-bold ">{{$totebag->item_name}}</h3>
+                            <p class="font-roboto font-light">{{$totebag->description}}</p>
+                            <div>
                                 @foreach ($totebag->colors as $color)
-                                    @if ($color->hex_code == '#FFFFFF')
-                                        <div style="background-color: {{$color->hex_code}}" class="w-[24px] h-[24px] rounded-full border hover:border-black">
-                                            <div class="hidden">
-                                                test
-                                            </div>
-                                        </div> 
-                                    @else
-
-                                        <div style="background-color: {{$color->hex_code}}" class="w-[24px] h-[24px] rounded-full border border-transparent hover:border-black">
-                                            <div class="hidden">
-                                                test
-                                            </div>
-                                        </div>
-                                    @endif
-                                    
+                                    <button id="tote-{{$totebag->id}}-color-{{$color->id}}" class="w-8 h-8 rounded-4xl hover: focus:outline-2
+                                        focus:outline-offset-2 focus:outline-black active:bg-black" 
+                                        style="background-color: {{$color->hex_code}}">
+                                    </button>
                                 @endforeach
                             </div>
                             
-                            <div class="w-full flex justify-center mx-auto">
-                                <a href="#" class="font-roboto bg-black text-white hover:bg-neutral-800 p-1 w-[100px] text-center rounded-2xl text-xs">Learn more</a>
+
+                            {{-- button to design --}}
+                            <div class="w-full h-fit flex gap-4">
+                                <button class="font-roboto font-bold w-24 h-9 bg-neutral-500/80 hover:bg-neutral-500 text-white rounded-md">To Cart</button>
+                                <a href="{{url("/studio")}}" class="flex items-center justify-center font-roboto font-bold w-24 h-9 bg-black hover:bg-neutral-800/80 text-white rounded-md">Design</a>
                             </div>
                         </div>
-                    </div>
+                    </div>    
                 @endforeach
-            </div>
-        </div>
+                
 
+                
+            </div>
+
+        </div>
     </main>
 @endsection

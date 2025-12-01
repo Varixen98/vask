@@ -4,12 +4,16 @@ use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudioController;
 use Illuminate\Support\Facades\Route;
 use Termwind\Components\Raw;
 
+
+// view homepage/index page
 Route::get('/', [HomeController::class, 'viewHomepage'])->name('homepage');
 
 
+// view about us page
 Route::get('/about', function () {
     return view('about.about');
 });
@@ -17,8 +21,11 @@ Route::get('/about', function () {
 // Route::get('/catalog', function () {
 //     return view('catalog.catalog');
 // });
+
+// view catalog page
 Route::get('/catalog', [CatalogController::class, 'viewCatalog']);
 
+// view how it work page
 Route::get('/how', function () {
     return view('how.how');
 });
@@ -27,6 +34,16 @@ Route::get('/how', function () {
 Route::get('/detail', function (){
     return view('detail.detail');
 });
+
+
+// // view studio
+// Route::middleware(['auth'])->group(function () {
+
+//     // studio page
+//     Route::get('/studio', [StudioController::class, 'viewStudio']);
+// });
+
+Route::get("/studio", [StudioController::class, "viewStudio"]);
 
 
 // login + Register
