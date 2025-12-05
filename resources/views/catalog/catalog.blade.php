@@ -26,12 +26,13 @@
                 @foreach ($totebags as $totebag)
                     {{-- slider card --}}
 
-                    <div id="card" class="border w-full h-fit grid grid-cols-2 rounded-4xl">
+                    <div id="card-{{$totebag->id}}" class="border w-full h-fit grid grid-cols-2 rounded-4xl">
                         <img class="w-full rounded-l-4xl" src="{{$totebag->image_url}}" alt="tote img">
 
                         <div class="flex flex-col items-start justify-center gap-2 p-2 ">
                             <h3 class="font-roboto font-bold ">{{$totebag->item_name}}</h3>
                             <p class="font-roboto font-light">{{$totebag->description}}</p>
+                            <p>Price: Rp {{number_format($totebag->price, 0, ',')}}</p>
                             <div>
                                 @foreach ($totebag->colors as $color)
                                     <button id="tote-{{$totebag->id}}-color-{{$color->id}}" class="w-8 h-8 rounded-4xl hover: focus:outline-2
@@ -44,8 +45,14 @@
 
                             {{-- button to design --}}
                             <div class="w-full h-fit flex gap-4">
-                                <button class="font-roboto font-bold w-24 h-9 bg-neutral-500/80 hover:bg-neutral-500 text-white rounded-md">To Cart</button>
-                                <a href="{{url("/studio")}}" class="flex items-center justify-center font-roboto font-bold w-24 h-9 bg-black hover:bg-neutral-800/80 text-white rounded-md">Design</a>
+                                <form action="{{route("cart.add")}}" method="POST">
+                                    @csrf
+                                    <input type="hidden" id="totebag_id" name="totebag_id" value="{{$totebag->id}}">
+                                    <button type="submit" class="font-roboto font-bold w-24 h-9 bg-neutral-500/80
+                                     hover:bg-neutral-500 text-white rounded-md">To Cart</button>
+                                </form>
+                    
+                                <a href="{{url("/studio")}}?id={{$totebag->id}}" class="flex items-center justify-center font-roboto font-bold w-24 h-9 bg-black hover:bg-neutral-800/80 text-white rounded-md">Design</a>
                             </div>
                         </div>
                     </div>    

@@ -7,16 +7,13 @@
 
         {{-- hero section --}}
         {{-- horizontal card --}}
-        <div id="heroSection" class="w-full h-[900px] flex gap-0 p-2 bg-cover bg-center justify-end" style="background-image: url({{asset('images/bg2.jpg')}})">
-            <div id="container" class="w-1/2 h-auto flex flex-col p-2 justify-center items-center">
-                <div id="heroTitle" class="flex">
-                    <h1 class="font-roboto font-bold text-5xl">START YOUR CREATION</h1>
+        <div id="heroSection" class="w-full h-[900px] flex gap-0 p-28 bg-cover bg-center justify-end items-center" style="background-image: url({{asset('images/bg2.jpg')}})">
+            <div id="container" class="w-[400px] h-fit flex flex-col p-3 justify-center items-center bg-black/50 rounded-2xl">
+                <div id="heroTitle" class="flex items-center justify-center">
+                    <h1 class="font-roboto font-bold text-3xl text-center text-white">START YOUR CREATION</h1>
                 </div>
                 <div id="heroBody" class="flex flex-col gap-4 p-2 text-center w-[75%]">
-                    <p class="font-roboto">Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                        Eveniet eaque molestiae, possimus libero praesentium reprehenderit blanditiis 
-                        porro dolores nemo sit dolore minus totam laboriosam! 
-                        Quam quos ipsum repudiandae labore debitis.</p>
+                    <p class="font-roboto text-[14px] text-white">Start design your own totebag!</p>
                     <div class="h-fit flex mx-auto">
                         <a href="{{url('/catalog')}}" class="font-roboto font-semibold border-2 border-transparent p-3 bg-black rounded-full text-white text-xl
                         hover:bg-white hover:text-black hover:border-black">
@@ -66,12 +63,34 @@
         <div class="flex flex-col items-center justify-center p-5 w-full">
 
             {{-- collage title --}}
-            <div class="flex flex-col items-center p-5 gap-2">
-                <h3 class="font-poppins font-bold text-3xl">Our Customer favorite</h3>
-                <p>Join VASK by ordering your own totebag!</p>
+            <div class="flex flex-col items-center p-5 gap-2 mb-6">
+                <h3 class="font-poppins font-bold text-3xl text-center">Our Customer Favorites</h3>
+                <p class="text-gray-600 text-center">Join VÄSK by ordering your own totebag!</p>
             </div>
-            <div>
-                ini nanti dulu
+
+            {{-- Collage Grid Wrapper --}}
+            <div class="grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-4 w-full max-w-6xl h-[600px] md:h-[500px]">
+
+                {{-- 1. Large Hero Image (Left) --}}
+                <div class="col-span-2 row-span-2 relative group overflow-hidden rounded-2xl">
+                    <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="{{asset('images/model1.jpg')}}" alt="Customer Favorite 1">
+                </div>
+
+                {{-- 2. Standard Image (Top Middle) --}}
+                <div class="col-span-1 row-span-1 relative group overflow-hidden rounded-2xl">
+                    <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="{{asset('images/model2.jpg')}}" alt="Customer Favorite 2">
+                </div>
+
+                {{-- 3. Standard Image (Top Right) --}}
+                <div class="col-span-1 row-span-1 relative group overflow-hidden rounded-2xl">
+                    <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="{{asset('images/model3.jpg')}}" alt="Customer Favorite 3">
+                </div>
+
+                {{-- 4. Wide Image (Bottom Right) --}}
+                <div class="col-span-2 row-span-1 relative group overflow-hidden rounded-2xl">
+                    <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="{{asset('images/model4.jpg')}}" alt="Customer Favorite 4">
+                </div>
+
             </div>
         </div>
     </main>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthUserController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -36,14 +37,24 @@ Route::get('/detail', function (){
 });
 
 
-// // view studio
-// Route::middleware(['auth'])->group(function () {
+// view studio
+Route::middleware(['auth'])->group(function () {
 
-//     // studio page
-//     Route::get('/studio', [StudioController::class, 'viewStudio']);
-// });
+    // studio page
+    Route::get('/studio', [StudioController::class, 'viewStudio']);
+});
 
-Route::get("/studio", [StudioController::class, "viewStudio"]);
+// view cart
+Route::middleware(['auth'])->group(function (){
+
+    Route::get("/cart", [CartController::class, "viewCart"]);
+    Route::post("/cart/add", [CartController::class, "store"])->name("cart.add");
+});
+
+
+
+// view studio page
+// Route::get("/studio", [StudioController::class, "viewStudio"]);
 
 
 // login + Register

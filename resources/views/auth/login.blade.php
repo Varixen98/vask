@@ -44,7 +44,7 @@
 
                 {{-- submit button --}}
                 <div class="w-[70%] flex flex-col gap-2">
-                    <button type="submit" class="border border-black font-roboto font-bold p-1 text-xs">Sign In</button>
+                    <button type="submit" class="border border-black bg-black text-white hover:bg-neutral-800 font-roboto font-bold p-1 text-xs">Sign In</button>
                     <a class="border border-black font-roboto font-bold p-1 text-center text-xs" href="{{url('/register')}}">Register</a>
                 </div>
             </form>
