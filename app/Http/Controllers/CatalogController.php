@@ -15,4 +15,10 @@ class CatalogController extends Controller
 
         return view('catalog.catalog', ['totebags' => $totebags]);
     }
+
+    public function viewDetail(Request $request){
+        $totebag = Totebag::find($request->id)->first();
+
+        return view('catalog.index', ['totebag' => $totebag]);
+    }
 }

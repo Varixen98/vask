@@ -6,8 +6,8 @@ use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudioController;
+use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
-use Termwind\Components\Raw;
 
 
 // view homepage/index page
@@ -32,43 +32,34 @@ Route::get('/how', function () {
 });
 
 // view detail temp
-Route::get('/detail', function (){
-    return view('detail.detail');
-});
+Route::get('/detail/totebag{id}',[CatalogController::class, "viewDetail"]);
 
 
-// view studio
-Route::middleware(['auth'])->group(function () {
+
+Route::middleware([AuthMiddleware::class])->group(function () {
 
     // studio page
     Route::get('/studio', [StudioController::class, 'viewStudio']);
-});
 
-// view cart
-Route::middleware(['auth'])->group(function (){
 
+    // view cart
     Route::get("/cart", [CartController::class, "viewCart"]);
     Route::post("/cart/add", [CartController::class, "store"])->name("cart.add");
 });
 
 
-
-// view studio page
-// Route::get("/studio", [StudioController::class, "viewStudio"]);
-
-
 // login + Register
 // view login form
-Route::get('/login', [AuthUserController::class, 'viewLoginForm']);
+Route::get('/login', [AuthUserController::class, 'viewLoginForm'])->name("login.user");
 
 // login user
-Route::post('/login', [AuthUserController::class, 'login'])->name('login.user');
+Route::post('/login', [AuthUserController::class, 'login'])->name('login.user.post');
 
 // register form
 Route::get('/register', [AuthUserController::class, 'viewRegisterForm']);
 
 // create user berdasarkan register form
-Route::post('/register', [AuthUserController::class, 'storeRegisterUser'])->name('register.user');
+Route::post('/register', [AuthUserController::class, 'storeRegisterUser'])->name('register.user.post');
 
 // logout user
 Route::post('/logout', [AuthUserController::class, 'logout'])->name('logout.user');

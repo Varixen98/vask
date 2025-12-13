@@ -36,15 +36,18 @@
 
             <div class="flex flex-col">
                 <span class="font-roboto font-semibold">Full Address</span>
-                {{$user->defaultAddress ? $user->defaultAddress->province->name : "Have not input"}}
-                <br>
-                {{$user->defaultAddress ? $user->defaultAddress->city->name : ""}}
-                <br>
-                {{$user->defaultAddress ? $user->defaultAddress->district->name : ""}}
-                <br>
-                {{$user->defaultAddress ? $user->defaultAddress->postal_code : ""}}
-                <br>
-                {{$user->defaultAddress ? $user->defaultAddress->street_address : ""}}
+                @if ($user->defaultAddress)
+                    {{$user->defaultAddress->province->name}}
+                    <br>
+                    {{$user->defaultAddress->city->name}}
+                    <br>
+                    {{$user->defaultAddress->district->name}},
+                    {{$user->defaultAddress->postal_code}}
+                    <br>
+                    {{$user->defaultAddress->street_address}}
+                @else
+                    Have not input
+                @endif
             </div>
         </div>
     </div>
