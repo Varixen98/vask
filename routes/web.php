@@ -32,19 +32,20 @@ Route::get('/how', function () {
 });
 
 // view detail temp
-Route::get('/detail/totebag{id}',[CatalogController::class, "viewDetail"]);
+Route::get('/detail/totebag{id}',[CatalogController::class, "viewDetail"])->name("view.detail");
 
 
 
 Route::middleware([AuthMiddleware::class])->group(function () {
 
     // studio page
-    Route::get('/studio', [StudioController::class, 'viewStudio']);
+    Route::get('/studio/totebag/{id}', [StudioController::class, 'viewStudio'])->name("view.studio");
 
 
     // view cart
     Route::get("/cart", [CartController::class, "viewCart"]);
-    Route::post("/cart/add", [CartController::class, "store"])->name("cart.add");
+    Route::post("/cart/add/{id}", [CartController::class, "store"])->name("cart.add");
+    Route::delete("/cart/delete/{id}", [CartController::class, "delete"])->name("cart.delete");
 });
 
 

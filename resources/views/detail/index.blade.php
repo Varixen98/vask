@@ -1,9 +1,12 @@
 @extends('layout.layout')
 
-@section('title', 'Totebag {{$totebag->name}}')
+@section('title', 'Totebag.{{$totebag->name}}')
 
 @section('content')
-    <main class="w-[85%] flex items-center justify-center">
+    <main class="flex flex-col w-full items-center justify-center h-auto mx-auto gap-10">
+
+        {{-- item detail card --}}
+        @include('detail.components.card-item')
         
     </main>
 @endsection

@@ -11,14 +11,19 @@ class CatalogController extends Controller
 
     public function viewCatalog(){
 
-        $totebags = Totebag::all()->load('colors');
+        // viw semua totebag record gak optimize
+        // $totebags = Totebag::all()->load('colors');
 
-        return view('catalog.catalog', ['totebags' => $totebags]);
+        // mau pake cara paginate
+        $totebags = Totebag::with('colors')->paginate(15);
+
+        // return view('catalog.catalog', ['totebags' => $totebags]);
+        return view("catalog.index", compact("totebags"));
     }
 
     public function viewDetail(Request $request){
-        $totebag = Totebag::find($request->id)->first();
+        $totebag = Totebag::find($request->id);
 
-        return view('catalog.index', ['totebag' => $totebag]);
+        return view('detail.index', ['totebag' => $totebag]);
     }
 }

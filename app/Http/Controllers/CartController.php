@@ -16,36 +16,37 @@ class CartController extends Controller
                          ->with('totebag')
                          ->get();
 
-        return view('cart.cart', ['cartItems' => $cartItems]);
+        return view('cart.index', ['cartItems' => $cartItems]);
     }
 
-    public function store(Request $request){
+    public function store($id){
        
 
         // 1. Validation
-        $request->validate([
-            'totebag_id' => 'required|exists:totebags,id',
+        $totebag = Totebag::findOrFail($id);
+
+        // check cart
+        $cartItem = Cart::firstOrNew([
+            "user_id" => Auth::id(),
+            "totebag_id" => $totebag->id
         ]);
 
-        // 2. Logic: Check for duplicate to update quantity instead of creating new row
-        $existingItem = Cart::where('user_id', Auth::id())
-                            ->where('totebag_id', $request->totebag_id)
-                            ->first();
+        $cartItem->quantity = ($cartItem->quantity ?? 0) + 1;
+        
+        $cartItem->save();
 
-        if ($existingItem) {
-            // Item exists? Add +1 to quantity
-            $existingItem->increment('quantity');
-        } else {
-            // New item? Create it
-            Cart::create([
-                'user_id' => Auth::id(),
-                'totebag_id' => $request->totebag_id,
-                'quantity' => 1
-            ]);
-        }
-
-        // 3. Redirect back to the Catalog (or to the Cart if you prefer)
-        // Using 'back()' allows them to keep shopping.
         return back()->with('success', 'Item added to cart!');
+    }
+
+
+    public function delete($id){
+
+        $target =  Cart::where("id", $id)->where("user_id", Auth::id())->delete();
+
+        if($target){
+            return back()->with("success", "Item deleted from cart!");
+        }
+        
+        return back()->with("error", "failed to delete data!");
     }
 }
