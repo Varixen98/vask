@@ -4,7 +4,7 @@
 
 
 @section('content')
-    <meta name="bag-filename" content="{{asset('images/tote_model/model1.png') }}">
+    <meta name="bag-filename" content="{{asset('images/model1.png') }}">
 
     <div class="flex h-[calc(100vh-83px)] overflow-hidden relative"> 
         <aside class="w-20 bg-gray-900 text-white flex flex-col items-center py-6 gap-6 z-50 shadow-xl">
