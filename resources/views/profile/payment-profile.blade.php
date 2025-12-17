@@ -44,7 +44,7 @@
            @endforeach
         </div>
         <div class='w-full flex items-center justify-center mx-auto'>
-            <a href="{{url('/dashboard/payment/form')}}" class="font-roboto font-bold text-center text-white bg-black hover:bg-neutral-800 rounded-md w-1/4 p-1">Add payment method</a>
+            <a href="{{url('/dashboard/payment/form')}}" class="font-roboto text-center text-white bg-black hover:bg-neutral-800/95 transition-all duration-500 w-1/4 p-1">Add payment method</a>
         </div>
         
     </div>

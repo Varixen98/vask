@@ -19,9 +19,6 @@ Route::get('/about', function () {
     return view('about.about');
 });
 
-// Route::get('/catalog', function () {
-//     return view('catalog.catalog');
-// });
 
 // view catalog page
 Route::get('/catalog', [CatalogController::class, 'viewCatalog']);
@@ -31,8 +28,8 @@ Route::get('/how', function () {
     return view('how.how');
 });
 
-// view detail temp
-Route::get('/detail/totebag{id}',[CatalogController::class, "viewDetail"])->name("view.detail");
+// view detail 
+Route::get('/detail/totebag/{id}',[CatalogController::class, "viewDetail"])->name("view.detail");
 
 
 
@@ -46,6 +43,31 @@ Route::middleware([AuthMiddleware::class])->group(function () {
     Route::get("/cart", [CartController::class, "viewCart"]);
     Route::post("/cart/add/{id}", [CartController::class, "store"])->name("cart.add");
     Route::delete("/cart/delete/{id}", [CartController::class, "delete"])->name("cart.delete");
+
+
+
+    // Profile dashboard
+    // view dashboard user
+    Route::get('/dashboard', [ProfileController::class, 'viewDashboard']); 
+
+    // view edit profile form 
+    Route::get('/dashboard/edit', [ProfileController::class, 'viewEditForm']);
+    Route::put('/dashboard/edit', [ProfileController::class, 'storeEdit'])->name('update.user');
+
+    // view delete account
+    Route::get('/dashboard/delete', [ProfileController::class, 'viewDeleteForm']);
+    Route::delete('/dashboard/delete', [ProfileController::class, 'destroyUser'])->name('delete.user');
+
+
+    // view address profile form
+    Route::get('/dashboard/address', [ProfileController::class, 'viewAddressForm']);
+
+
+    // view payment profile form
+    Route::get('/dashboard/payment', [ProfileController::class, 'viewPayment'])->name('index.payment.method');
+    Route::get('/dashboard/payment/form', [ProfileController::class, 'viewPaymentForm']);
+    Route::post('/dashboard/payment', [ProfileController::class, 'storePayment'])->name('store.payment.method');
+    Route::delete('/dashboard/payment/{id}', [ProfileController::class, 'destroyPayment'])->name('destroy.payment.method');
 });
 
 
@@ -66,25 +88,3 @@ Route::post('/register', [AuthUserController::class, 'storeRegisterUser'])->name
 Route::post('/logout', [AuthUserController::class, 'logout'])->name('logout.user');
 
 
-// Profile dashboard
-// view dashboard user
-Route::get('/dashboard', [ProfileController::class, 'viewDashboard']); 
-
-// view edit profile form 
-Route::get('/dashboard/edit', [ProfileController::class, 'viewEditForm']);
-Route::put('/dashboard/edit', [ProfileController::class, 'storeEdit'])->name('update.user');
-
-// view delete account
-Route::get('/dashboard/delete', [ProfileController::class, 'viewDeleteForm']);
-Route::delete('/dashboard/delete', [ProfileController::class, 'destroyUser'])->name('delete.user');
-
-
-// view address profile form
-Route::get('/dashboard/address', [ProfileController::class, 'viewAddressForm']);
-
-
-// view payment profile form
-Route::get('/dashboard/payment', [ProfileController::class, 'viewPayment'])->name('index.payment.method');
-Route::get('/dashboard/payment/form', [ProfileController::class, 'viewPaymentForm']);
-Route::post('/dashboard/payment', [ProfileController::class, 'storePayment'])->name('store.payment.method');
-Route::delete('/dashboard/payment{id}', [ProfileController::class, 'destroyPayment'])->name('destroy.payment.method');

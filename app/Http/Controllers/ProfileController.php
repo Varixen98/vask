@@ -11,13 +11,15 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    //
+    //view dashboard
     public function viewDashboard(){
 
         $user = Auth::user()->load('defaultAddress');
         return view('profile.dashboard', ['user' => $user]);
     }
 
+
+    // view edit profile page
     public function viewEditForm(){
 
         $user = Auth::user()->load('defaultAddress');
@@ -33,69 +35,7 @@ class ProfileController extends Controller
         ));
     }
 
-    public function viewAddressForm(Request $request){
-
-        $user = $request->user();
-
-        $addresses = $user->addresses()->with(['province', 'city', 'district'])->get();
-
-        return view('profile.address-profile', ['addresses' => $addresses]);
-    }
-
-    /**
-     * 
-     * 
-     * function for payment methods
-     */
-
-    public function viewPayment(Request $request){
-        $user = $request->user();
-
-        $payments = $user->payments()->get();
-        return view('profile.payment-profile', [
-            'user' => $user,
-            'payments' => $payments
-        ]);
-    }
-
-    public function viewPaymentForm(){
-        return view('profile.payment-form-profile');
-    }
-
-    public function destroyPayment(Request $request, $id){
-
-        $payment = $request->user()->payments()->findOrFail($id);
-
-        $payment->delete();
-
-        return redirect()->back()->with('success', 'delete a payment method');
-    }
-
-
-
-    public function viewDeleteForm(){
-
-        return view('profile.delete-profile');
-    }
-
-    public function storePayment(Request $request){
-
-        $request->merge([
-            'card_number' => str_replace(' ', '', $request->input('card_number'))
-        ]);
-
-        $payment = $request->validate([
-            'full_name' => ['required', 'string', 'max:255'],
-            'card_number' => ['required', 'numeric', 'digits:16'],
-            'cvv' => ['required', 'numeric', 'digits:3'],
-            'expire_date' => ['required', 'string', 'size:7']
-        ]);
-
-        $request->user()->payments()->create($payment);
-
-        return redirect()->route('index.payment.method')->with('success', 'payment method created!');
-    }
-
+    // menyoimpan data edit profile
     public function storeEdit(Request $request){
         
         $user = $request->user();
@@ -144,6 +84,55 @@ class ProfileController extends Controller
     }
 
 
+    // view address edit page
+    public function viewAddressForm(Request $request){
+
+        $user = $request->user();
+
+        $addresses = $user->addresses()->get();
+
+        return view('profile.address.index', ['addresses' => $addresses]);
+    }
+
+    
+
+    /**
+     * 
+     * 
+     * function for payment methods
+     */
+
+    public function viewPayment(Request $request){
+        $user = $request->user();
+
+        $payments = $user->payments()->get();
+        return view('profile.payment-profile', [
+            'user' => $user,
+            'payments' => $payments
+        ]);
+    }
+
+    public function viewPaymentForm(){
+        return view('profile.payment-form-profile');
+    }
+
+    public function destroyPayment(Request $request, $id){
+
+        $payment = $request->user()->payments()->findOrFail($id);
+
+        $payment->delete();
+
+        return redirect()->back()->with('success', 'delete a payment method');
+    }
+
+
+    // view delete acc page
+    public function viewDeleteForm(){
+
+        return view('profile.delete.index');
+    }
+
+    // delete user
     public function destroyUser(Request $request){
 
         $user = $request->user();
@@ -157,4 +146,28 @@ class ProfileController extends Controller
 
         return redirect('/')->with('success', 'Account delete!');
     }
+
+
+    // menyimpan payment method
+    public function storePayment(Request $request){
+
+        $request->merge([
+            'card_number' => str_replace(' ', '', $request->input('card_number'))
+        ]);
+
+        $payment = $request->validate([
+            'full_name' => ['required', 'string', 'max:255'],
+            'card_number' => ['required', 'numeric', 'digits:16'],
+            'cvv' => ['required', 'numeric', 'digits:3'],
+            'expire_date' => ['required', 'string', 'size:7']
+        ]);
+
+        $request->user()->payments()->create($payment);
+
+        return redirect()->route('index.payment.method')->with('success', 'payment method created!');
+    }
+
+
+
+   
 }

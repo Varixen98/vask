@@ -17,7 +17,7 @@
         </div>
 
         {{-- horizontal card 2 --}}
-        <div class="flex w-full gap-0 p-2">
+        <div class="flex w-full px-2 my-20">
             <div class="w-1/2 flex flex-col p-5 justify-center items-center gap-2">
                 <h3 class="font-roboto text-4xl text-black font-bold">
                     Quality
@@ -37,7 +37,7 @@
                     If you are even 1% unsatisfied, we will 100% make sure it gets resolved. Visit our Quality Page to learn more about our standards.
                 </p>
             </div>
-            <img class="w-1/2" src="{{asset('images/qa.png')}}" alt="">
+            <img class="w-[45%]" src="{{asset('images/qa.png')}}" alt="">
         </div>
     </main>
 @endsection

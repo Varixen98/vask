@@ -44,4 +44,6 @@
             </div>
         </form>
     </div>
+
+    @vite('resources/js/paymentEditForm.js')
 @endsection

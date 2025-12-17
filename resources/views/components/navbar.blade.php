@@ -1,5 +1,5 @@
 <header class="absolute top-0 mx-auto right-0 left-0 w-[85%] p-4 z-50">
-    <nav id="navbarContainer" class="w-full mx-auto flex items-center justify-between py-4 px-6 rounded-xl border border-gray-300 bg-white shadow-sm">
+    <nav id="navbarContainer" class="w-full mx-auto flex items-center justify-between py-4 px-6 rounded-xl border border-gray-300 bg-white shadow-2xl sticky">
 
         {{-- logo --}}
         <div id="logoContainer" class="flex items-center justify-center">

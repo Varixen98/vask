@@ -6,7 +6,7 @@
         <p class="font-roboto">Beautifully Functional. Purposefully Designed. Consciously Crafted.</p>
         <div class="w-[250px] flex items-center justify-center ">
             <a href="{{url("/catalog")}}" class="p-2 mt-2 bg-black text-white border border-transparent
-             hover:bg-white hover:text-black hover:border-black transition-all duration-200 font-roboto">SHOP OUR PRODUCTS</a>
+             hover:bg-white hover:text-black hover:border-black transition-all duration-200 font-roboto">Shop our products</a>
         </div>
     </div>
 
@@ -25,7 +25,7 @@
                         <h1 class="font-dmserif text-3xl font-bold text-white">{{$totebag->item_name}}</h1>
                         <p class="mb-3 text-lg italic text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">{{$totebag->description}}</p>
                         <a class="rounded-full bg-neutral-900 hover:bg-neutral-500/20 py-2 px-3.5 font-com text-sm 
-                        capitalize text-white shadow shadow-black/60" href="{{url('/catalog')}}">See More</a>
+                        capitalize text-white shadow shadow-black/60" href="{{route('view.detail', $totebag->id)}}">See More</a>
                     </div>
                 </div>    
             @endforeach

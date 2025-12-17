@@ -3,6 +3,7 @@
 @section('title', 'Delete Profile')
 
 @section('content')
+    @include("profile.delete.components.modal-mask")
 
     <div class="w-full flex flex-col gap-2 p-2 mx-auto">
         <div class="w-full">
@@ -38,4 +39,5 @@
         
     </div>
 
+    @vite('resources/js/modal.js')
 @endsection

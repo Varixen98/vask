@@ -24,6 +24,6 @@ class CatalogController extends Controller
     public function viewDetail(Request $request){
         $totebag = Totebag::find($request->id);
 
-        return view('detail.index', ['totebag' => $totebag]);
+        return view('detail.index', compact('totebag'));
     }
 }

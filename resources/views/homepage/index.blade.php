@@ -1,6 +1,6 @@
 @extends('layout.layout')
 
-@section('title', 'homepage')
+@section('title', 'Homepage')
 
 @section('content')
     <main class="flex flex-col w-full h-auto mx-auto gap-28">

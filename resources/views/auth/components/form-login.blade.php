@@ -2,28 +2,14 @@
     @csrf
 
     {{-- email input --}}
-    <div class="w-[70%] flex flex-col gap-1">
-        <label for="email" class="font-roboto font-bold">Email</label>
-        <input type="email" name="email" id="email" autocomplete="off" class="p-1 border border-gray-300 rounded-md">   
-                    
-        @error('email')
-            <p class="text-red-500 text-xs italic mt-1">{{ $message }}</p>
-        @enderror
-    </div>
+    @include("auth.components.email-input")
                 
     {{-- password input --}}
-    <div class="w-[70%] flex flex-col gap-1">
-        <label for="password" class="font-roboto font-bold">Password</label>
-        <input type="password" name="password" id="password" autocomplete="off"  class="p-1 border border-gray-300 rounded-md"> 
-                    
-        @error('password')
-            <p class="text-red-500 text-xs italic mt-1">{{ $message }}</p>
-        @enderror
-    </div>
-                
+    @include("auth.components.password-input")
+
     {{-- forgot password --}}
     <div class="w-[70%] flex justify-end">
-        <a href="#" class="flex font-roboto underline">Forgot password?</a>
+        <a href="#" class="flex text-gray-500/60 hover:text-black transition-all duration-500 font-roboto text-xs underline">Forgot password?</a>
     </div>
 
     {{-- submit button --}}
