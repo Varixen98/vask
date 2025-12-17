@@ -19,6 +19,6 @@
     @include('components.footer')
 
 
-    @vite(['resources/js/app.js' , 'resources/js/navbar.js'])
+    @vite(['resources/js/app.js' , 'resources/js/navbar.js', 'resources/js/catalog.js'])
 </body>
 </html>

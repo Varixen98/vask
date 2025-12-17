@@ -115,8 +115,10 @@
             </div>
             
             <div class="flex justify-start items-center gap-20 w-[85%]">
-                <button type="submit" class="w-[30%] p-1 bg-black text-white hover:bg-neutral-800 font-roboto font-bold">Save</button>
+                <button type="submit" class="w-[30%] p-1 bg-black text-white hover:bg-neutral-800/95 transition-all duration-500 font-roboto">Save</button>
             </div>
         </form>
     </div>
+
+    @vite("resources/js/editForm.js")
 @endsection

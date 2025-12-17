@@ -9,45 +9,11 @@
             <img class="w-full h-full object-cover" src="{{asset('images/model5.png')}}" alt="model img">
         </div>
         <div class="w-1/2 flex flex-col gap-4 items-center justify-center">
-            <div class="w-full mx-auto p-2">
-                <a class="flex items-center justify-center" href={{url('/')}}>
-                    <img class="h-24" src="{{asset('images/lgBv4.jpg')}}" alt="">
-                </a>
-            </div>
-            <form action="{{route('login.user')}}" method="POST" class="w-[80%] flex flex-col p-2 mx-auto gap-4 items-center justify-center">
-                @csrf
+            
+            @include("auth.components.logo")
 
-                {{-- email input --}}
-                <div class="w-[70%] flex flex-col gap-1">
-                    <label for="email" class="font-roboto font-bold">Email</label>
-                    <input type="email" name="email" id="email" class="p-1 border border-gray-300 rounded-md">   
-                    
-                    @error('email')
-                        <p class="text-red-500 text-xs italic mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-                
-                {{-- password input --}}
-                <div class="w-[70%] flex flex-col gap-1">
-                    <label for="password" class="font-roboto font-bold">Password</label>
-                    <input type="password" name="password" id="password" class="p-1 border border-gray-300 rounded-md"> 
-                    
-                    @error('password')
-                        <p class="text-red-500 text-xs italic mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-                
-                {{-- forgot password --}}
-                <div class="w-[70%] flex justify-end">
-                    <a href="#" class="flex font-roboto underline">Forgot password?</a>
-                </div>
-
-                {{-- submit button --}}
-                <div class="w-[70%] flex flex-col gap-2">
-                    <button type="submit" class="border border-black font-roboto font-bold p-1 text-xs">Sign In</button>
-                    <a class="border border-black font-roboto font-bold p-1 text-center text-xs" href="{{url('/register')}}">Register</a>
-                </div>
-            </form>
+            {{-- form --}}
+            @include("auth.components.form-login")
 
             {{-- login dengan google --}}
             <div class="w-[80%] flex flex-col justify-center items-center p-2 gap-4 mx-auto">
