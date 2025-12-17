@@ -3,114 +3,114 @@
 @section('title', 'Delete Profile')
 
 @section('content')
-    @include("profile.address.components.modal-mask")
+
 
     <div class="w-full flex flex-col gap-4 p-2 mx-auto">
         {{-- Header Section --}}
         <div class="w-full">
             <h3 class="font-roboto font-bold text-xl">Address</h3>
-            <p class="font-roboto text-xs font-light">You can only save up to 5 addresses.</p>
+            <p class="font-roboto text-xs text-gray-500/80 mt-2">You can only save up to 5 addresses.</p>
         </div>
         
         <hr class="border border-gray-300">
         
-        {{-- Address List --}}
         <div class="w-full flex flex-col gap-4">
-            {{-- SORTING FIX: sortByDesc ensures 'is_default' (true) appears first --}}
+            {{-- This sorts the list so Default (true) comes first, then False follows. All are shown. --}}
             @forelse ($addresses->sortByDesc('is_default') as $address)
                 
                 @if ($address->is_default)
-                    {{-- DEFAULT ADDRESS LAYOUT --}}
-                    <div class="w-full flex">
+                    {{-- === LAYOUT FOR DEFAULT ADDRESS === --}}
+                    <div class="w-full flex p-2"> {{-- Optional: Added distinct background --}}
                         <div class="w-3/4 flex flex-col">
                             <div class="flex flex-col w-full">
-                                <p>{{$address->province->name}}</p>
+                                <p class="font-bold">{{$address->province->name}} <span class="text-xs font-normal text-green-700 bg-green-100 px-1 rounded ml-2">Default</span></p>
                                 <p>{{$address->city->name}}</p>
                                 <p>{{$address->district->name}}</p>
-                                <p>{{$address->postal_code}} , {{$address->street_address}}</p>
+                                <p>{{$address->postal_code}}, {{$address->street_address}}</p>
                             </div>
-                            <div class="flex gap-1">
+                            <div class="flex gap-1 mt-2">
                                 <div class="w-[18%]">
-                                    <a href="#" class="font-roboto text-center hover:font-bold hover:underline">Edit Address</a>
+                                    <a href="#" class="font-roboto text-center text-sm text-gray-600 hover:text-black hover:underline">Edit Address</a>
                                 </div>
-                                <p>|</p>
-                                <div class="flex items-center ">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
-                                    class="size-6 stroke-green-600">
+                                <p class="text-gray-400">|</p>
+                                <div class="flex items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 stroke-green-600">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                                     </svg>
-                                    <p class="font-roboto text-center">The current address</p>
+                                    <p class="font-roboto text-sm text-green-700">The current address</p>
                                 </div>
                             </div>    
                         </div>
                         
-                        {{-- Delete Button --}}
-                        <div class="w-1/4 flex justify-end items-start">
+                        {{-- Delete Button (Default) --}}
+                        <form action="{{ route('destroy.address', $address->id) }}" method="POST" class="w-1/4 flex justify-end items-start">
+                            @csrf
+                            @method('DELETE')
                             <button id="delBtn" type="submit">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="
-                                size-6 hover:border hover:border-neutral-700 hover:stroke-red-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-400 hover:text-red-500 transition-colors">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                                 </svg>    
                             </button>
-                        </div>
-                    </div>
+                        </form>
 
+                        
+                    </div>
+                    <hr class="w-full border border-gray-300">
                 @else
-                    {{-- NON-DEFAULT ADDRESS LAYOUT --}}
-                    <div class="w-full flex">
+                    {{-- === LAYOUT FOR OTHER ADDRESSES === --}}
+                    <div class="w-full flex p-2 border-b border-gray-100 last:border-0">
                         <div class="w-3/4 flex flex-col">
-                            <div class="flex flex-col w-full">
-                                <p>{{$address->province->name}}</p>
+                            <div class="flex flex-col w-full text-gray-700">
+                                <p class="font-bold">{{$address->province->name}}</p>
                                 <p>{{$address->city->name}}</p>
                                 <p>{{$address->district->name}}</p>
-                                {{-- BUG FIX: Added postal_code here to match the default layout --}}
-                                <p>{{$address->postal_code}} , {{$address->street_address}}</p>
+                                <p>{{$address->postal_code}}, {{$address->street_address}}</p>
                             </div>
-                            <div class="flex gap-1">
+                            <div class="flex gap-1 mt-2">
                                 <div class="w-[18%]">
-                                    <a href="#" class="font-roboto text-center hover:font-bold hover:underline">Edit Address</a>
+                                    <a href="#" class="font-roboto text-center text-sm text-gray-600 hover:text-black hover:underline">Edit Address</a>
                                 </div>
-                                <p>|</p>
+                                <p class="text-gray-400">|</p>
+                                
                                 {{-- Set Default Button --}}
-                                <form action="" method="POST" class="flex items-center ">
+                                <form action="" method="POST" class="flex items-center">
                                     @csrf
                                     @method('PUT')
-                                    <button type="submit" class="font-roboto text-center hover:underline">Set as default address</button>
+                                    <button type="submit" class="font-roboto text-sm text-gray-500 hover:text-black hover:underline">Set as default address</button>
                                 </form>
                             </div>   
                         </div>
                         
-                        {{-- Delete Button --}}
-                        <div class="w-1/4 flex justify-end items-start">
+                        {{-- Delete Button (Non-Default) --}}
+                        <form action="{{ route('destroy.address', $address->id) }}" method="POST" class="w-1/4 flex justify-end items-start">
+                            @csrf
+                            @method('DELETE')
                             <button id="delBtn" type="submit">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="
-                                size-6 hover:border hover:border-neutral-700 hover:stroke-red-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-400 hover:text-red-500 transition-colors">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                                 </svg>    
                             </button>
-                        </div>
-                    </div>  
+                        </form>
+                    </div>
+                    <hr class="w-full border border-gray-300">
                 @endif
 
             @empty
                 {{-- Empty State --}}
-                <div class="w-full flex flex-col items-center gap-2 py-4">
+                <div class="w-full flex flex-col items-center gap-2 py-8 bg-gray-50 rounded">
                     <p class="text-gray-500">There is no record yet!</p>
-                    <button class="flex bg-black font-bold font-roboto p-2 w-[200px] text-white text-center justify-center rounded hover:bg-neutral-800 transition-colors">
+                    <a href="{{ url('/dashboard/address/form') }}" class="flex bg-black font-roboto py-2 px-6 text-white text-center justify-center rounded hover:bg-neutral-800 transition-colors">
                         Add Address
-                    </button>
+                    </a>
                 </div>
             @endforelse
         </div>
 
-        {{-- UX FIX: Only show this bottom button if there ARE addresses (prevents double buttons) --}}
         @if($addresses->isNotEmpty())
             <div class="w-full flex justify-center items-center mt-4">
-                <a href="#" class="font-roboto text-center text-white bg-black hover:bg-neutral-800/95 transition-all duration-500 w-1/4 p-1">Add Another Address</a>
+                <a href="{{ url('/dashboard/address/form') }}" class="font-roboto text-center text-white bg-black hover:bg-neutral-800/95 transition-all duration-300 w-1/4 py-2 rounded">Add Another Address</a>
             </div>
         @endif
     </div>
 
-
-     @vite('resources/js/modal.js')
 @endsection

@@ -60,14 +60,16 @@ Route::middleware([AuthMiddleware::class])->group(function () {
 
 
     // view address profile form
-    Route::get('/dashboard/address', [ProfileController::class, 'viewAddressForm']);
-
+    Route::get("/dashboard/address", [ProfileController::class, 'viewAddressForm']);
+    Route::get("/dashboard/address/form", [ProfileController::class, 'viewAddressEditForm']);
+    Route::post("/dashboad/address/form/store", [ProfileController::class, 'storeNewAddress'])->name("store.address");
+    Route::delete("/dashboard/address/delete/{id}", [ProfileController::class, "destroyAddress"])->name("destroy.address");
 
     // view payment profile form
     Route::get('/dashboard/payment', [ProfileController::class, 'viewPayment'])->name('index.payment.method');
     Route::get('/dashboard/payment/form', [ProfileController::class, 'viewPaymentForm']);
     Route::post('/dashboard/payment', [ProfileController::class, 'storePayment'])->name('store.payment.method');
-    Route::delete('/dashboard/payment/{id}', [ProfileController::class, 'destroyPayment'])->name('destroy.payment.method');
+    Route::delete('/dashboard/payment/delete/{id}', [ProfileController::class, 'destroyPayment'])->name('destroy.payment.method');
 });
 
 

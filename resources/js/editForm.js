@@ -6,11 +6,11 @@ provinceSel.addEventListener('change',  (event) => {
     const provinceId = event.target.value
     console.log("For Province you selected: ", provinceId)
 
-    // CRITICAL FIX: Clear previous options before fetching new ones
+    
     citySel.innerHTML = '<option value="">-- Select City --</option>';
     districtSel.innerHTML = '<option value="">-- Select District --</option>';
     
-    // Disable them until data loads
+    
     citySel.setAttribute('disabled', 'disabled');
     districtSel.setAttribute('disabled', 'disabled');
 
