@@ -32,7 +32,7 @@ class TotebagFactory extends Factory
             'description' => $this->faker->sentences(3, true),
             'material' => $this->faker->randomElement(['Canvas', 'Leather', 'Denim', 'Polyester']),
             'price' => $this->faker->numberBetween(25000, 400000),
-            'image_url' => 'images/Catalog/' . $randomImg
+            'image_url' => 'images/' . $randomImg
             
         ];
     }
