@@ -15,6 +15,6 @@ class TotebagSeeder extends Seeder
     public function run(): void
     {
         //
-        Totebag::factory()->count(1000)->has(Color::factory()->count(3))->create();
+        Totebag::factory()->count(20)->has(Color::factory()->count(3))->create();
     }
 }
