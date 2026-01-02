@@ -1,9 +1,9 @@
 <div class="w-[70%] flex flex-col gap-1">
     <label for="gender" class="w-full font-roboto text-xs">Gender</label>
-    <div class="w-full flex items-center justify-center p-1">
+    <div class="w-full flex items-center justify-center">
 
 
-        <div class="w-full h-8 flex justify-center items-center rounded-2xl overflow-hidden">
+        <div class="w-full h-8 flex justify-center items-center rounded-md overflow-hidden">
             
             {{-- male radio button --}}
             <div class="w-1/2 flex">
