@@ -46,41 +46,48 @@ class ProvinceSeeder extends Seeder
 
         $this->command->info("Seeding $table...");
 
-        $csv = Reader::createFromPath($fullpath, 'r');
-        $csv->setHeaderOffset(0);
+        try{
+            $csv = Reader::createFromPath($fullpath, 'r');
+            $csv->setHeaderOffset(0);
 
-        $records = $csv->getRecords();
-        $chunk = [];
-        $timestamp = now();
+            $records = $csv->getRecords();
+            $chunk = [];
+            $timestamp = now();
 
-        foreach($records as $record){
-            $row = [
-                'id' => $record['id'],
-                'name' => $record['name'],
-                'created_at' => $timestamp,
-                'updated_at' => $timestamp,
-            ];
+            foreach($records as $record){
+                $row = [
+                    'id' => $record['id'],
+                    'name' => $record['name'],
+                    'created_at' => $timestamp,
+                    'updated_at' => $timestamp,
+                ];
 
-            if(isset($record['province_id'])){
-                $row['province_id'] = $record['province_id'];
+                if(isset($record['province_id'])){
+                    $row['province_id'] = $record['province_id'];
+                }
+
+                if(isset($record['city_id'])){
+                    $row['city_id'] = $record['city_id'];
+                }
+
+                $chunk[] = $row;
+
+                if(count($chunk) >= 500){
+                    DB::table($table)->insert($chunk);
+                    $chunk = [];
+                }
+
             }
 
-            if(isset($record['city_id'])){
-                $row['city_id'] = $record['city_id'];
-            }
-
-            $chunk[] = $row;
-
-            if(count($chunk) >= 500){
+            // Insert remaining records
+            if (!empty($chunk)) {
                 DB::table($table)->insert($chunk);
-                $chunk = [];
             }
 
         }
-
-        // Insert remaining records
-        if (!empty($chunk)) {
-            DB::table($table)->insert($chunk);
+        catch (\Exception $e){
+            $this->command->error("Error seeding $table: " . $e->getMessage());
+            return;
         }
     }
 }
