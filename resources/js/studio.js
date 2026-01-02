@@ -1,33 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // ==========================================
-    // 1. CONFIGURATION (CALIBRATION)
-    // ==========================================
-    // Adjust these 2 numbers to fit your specific bag image
     const BAG_CONFIG = {
-        // How far down the image does the "Body" start? (0.35 = 35% down)
+        
         topOffset: 0.50, 
         
-        // How tall is the printable body area? (0.55 = 55% of image height)
+        
         bodyHeight: 0.40, 
 
-        // We want the canvas to be 80% of the bag's width
+        
         widthRatio: 0.40 
     };
 
-    // ==========================================
-    // 2. INITIALIZATION
-    // ==========================================
+ 
     const imgElement = document.getElementById('tote-background');
     const wrapper = document.getElementById('canvas-wrapper');
     const metaTag = document.querySelector('meta[name="bag-filename"]');
 
     if (!metaTag || !imgElement) return console.error("Missing Image or Meta Tag");
 
-    // Set the image source
+
     imgElement.src = metaTag.content;
 
-    // Initialize Fabric (Empty initially)
     const canvas = new fabric.Canvas('toteCanvas', {
         preserveObjectStacking: true
     });
@@ -35,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     // 3. CALCULATION LOGIC
     // ==========================================
-    // We must wait for the image to load to know its pixel dimensions
     imgElement.onload = function() {
         
         const imgW = imgElement.clientWidth;
@@ -44,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(`Bag Loaded: ${imgW}px x ${imgH}px`);
 
         // --- A. Calculate Canvas Dimensions ---
-        // Width: 80% of the image width
         const canvasWidth = imgW * BAG_CONFIG.widthRatio;
         
         // Height: Based on the body height config
@@ -87,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
             top: canvas.height / 2, 
             originX: 'center',
             originY: 'center',
-            fontFamily: fontVal, 
+            fontFamily: fontVal,    
             fontSize: parseInt(sizeVal),
             fill: '#000000'
         });
