@@ -1,5 +1,6 @@
 {{-- horizontal card --}}
-<div id="heroSection" class="w-full h-[900px] flex gap-0 p-36 bg-cover bg-center justify-end items-center" style="background-image: url({{asset('images/bg2.jpg')}})">
+<div id="heroSection" class="w-full h-[900px] flex gap-0 p-36 bg-cover bg-center justify-end items-center" 
+style="background-image: url({{asset('images/bg2.webp')}})">
     
     
     <div id="container" class="w-[400px] h-fit flex flex-col p-3 justify-center items-center bg-white border border-gray-300  rounded-2xl">

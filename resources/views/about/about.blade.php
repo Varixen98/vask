@@ -7,7 +7,7 @@
     <main class="flex flex-col w-full h-auto mx-auto">
 
         {{-- hero section --}}
-        <div class="flex w-full h-[700px] gap-0 p-2 bg-center bg-cover" style="background-image: url({{asset('images/bg3.png')}})">
+        <div class="flex w-full h-[700px] gap-0 p-2 bg-center bg-cover" style="background-image: url({{asset('images/bg3.webp')}})">
             <div class="w-1/2 flex flex-col p-5 justify-center items-center gap-2">
                 <h2 class="font-roboto font-bold text-7xl">Why VÄSK?</h2>
                 <p class="font-roboto w-[400px]">With VÄSK customer can design their perfect tote bag with their
@@ -37,7 +37,7 @@
                     If you are even 1% unsatisfied, we will 100% make sure it gets resolved. Visit our Quality Page to learn more about our standards.
                 </p>
             </div>
-            <img class="w-[45%]" src="{{asset('images/qa.png')}}" alt="">
+            <img class="w-[45%]" src="{{asset('images/qa.webp')}}" alt="">
         </div>
     </main>
 @endsection

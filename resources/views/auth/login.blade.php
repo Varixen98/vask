@@ -6,7 +6,7 @@
 @section('content')
     <main class="w-full h-screen flex mx-auto p-0">
         <div class="w-1/2">
-            <img class="w-full h-full object-cover" src="{{asset('images/model5.png')}}" alt="model img">
+            <img class="w-full h-full object-cover" src="{{asset('images/model5.webp')}}" alt="model img">
         </div>
         <div class="w-1/2 flex flex-col gap-4 items-center justify-center">
             
