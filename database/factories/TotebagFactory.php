@@ -18,10 +18,10 @@ class TotebagFactory extends Factory
     {   
 
         $images = [
-            'tote1.png',
-            'tote2.png',
-            'tote3.png',
-            'tote4.png',
+            'tote1.webp',
+            'tote2.webp',
+            'tote3.webp',
+            'tote4.webp',
         ];
 
         $randomImg = $this->faker->randomElement($images);
