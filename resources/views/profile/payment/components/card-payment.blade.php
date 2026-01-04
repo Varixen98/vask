@@ -90,5 +90,8 @@
         <div class="flex text-center align-middle mx-auto font-roboto text-black/50">
             No Payment Methods Recorded
         </div>
+        <div class='w-full flex items-center justify-center mx-auto'>
+            <a href="{{url('/dashboard/payment/form')}}" class="w-1/4 font-roboto text-center p-1 bg-black text-white border border-transparent hover:bg-white hover:text-black hover:border-black transition-all duration-500">Add payment method</a>
+        </div>
     @endforelse 
 </div>
