@@ -51,8 +51,8 @@ Route::middleware([AuthMiddleware::class])->group(function () {
     Route::get('/dashboard', [ProfileController::class, 'viewDashboard']); 
 
     // view edit profile form 
-    Route::get('/dashboard/edit', [ProfileController::class, 'viewEditForm']);
-    Route::put('/dashboard/edit', [ProfileController::class, 'storeEdit'])->name('update.user');
+    Route::get('/dashboard/profile/edit', [ProfileController::class, 'viewEditProfileForm']);
+    Route::put('/dashboard/profile/edit', [ProfileController::class, 'storeEditProfile'])->name('update.user');
 
     // view delete account
     Route::get('/dashboard/delete', [ProfileController::class, 'viewDeleteForm']);
@@ -61,13 +61,16 @@ Route::middleware([AuthMiddleware::class])->group(function () {
 
     // view address profile form
     Route::get("/dashboard/address", [ProfileController::class, 'viewAddressForm']);
-    Route::get("/dashboard/address/form", [ProfileController::class, 'viewAddressEditForm']);
+    Route::get("/dashboard/address/addform", [ProfileController::class, 'viewAddressAddForm'])->name("add.address");
+    Route::get("/dashboard/address/editform/{id}", [ProfileController::class, "viewAddressEditForm"])->name("update.address");
     Route::post("/dashboad/address/form/store", [ProfileController::class, 'storeNewAddress'])->name("store.address");
     Route::delete("/dashboard/address/delete/{id}", [ProfileController::class, "destroyAddress"])->name("destroy.address");
+    Route::put("/dashboard/address/setdefault/{id}", [ProfileController::class, "setDefaultAddress"])->name("update.default.address");
 
     // view payment profile form
     Route::get('/dashboard/payment', [ProfileController::class, 'viewPayment'])->name('index.payment.method');
     Route::get('/dashboard/payment/form', [ProfileController::class, 'viewPaymentForm']);
+    Route::put("/dashboard/payment/setdefault/{id}", [ProfileController::class, "setDefaultPayment"])->name("update.default.method");
     Route::post('/dashboard/payment', [ProfileController::class, 'storePayment'])->name('store.payment.method');
     Route::delete('/dashboard/payment/delete/{id}', [ProfileController::class, 'destroyPayment'])->name('destroy.payment.method');
 });

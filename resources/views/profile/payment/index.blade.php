@@ -13,10 +13,18 @@
         
         {{-- card payment list --}}
         @include("profile.payment.components.card-payment")
+        
+        @if($payments->isNotEmpty() && count($payments) < 5)
+            <div class='w-full flex items-center justify-center mx-auto'>
+                <a href="{{url('/dashboard/payment/form')}}" class="w-1/4 font-roboto text-center p-1 bg-black text-white border border-transparent hover:bg-white hover:text-black hover:border-black transition-all duration-500">Add payment method</a>
+            </div>
+        @endif
 
-        <div class='w-full flex items-center justify-center mx-auto'>
-            <a href="{{url('/dashboard/payment/form')}}" class="font-roboto text-center text-white bg-black hover:bg-neutral-800/95 transition-all duration-500 w-1/4 p-1">Add payment method</a>
-        </div>
+        @if($payments->isNotEmpty() && count($payments) >= 5)
+            <div class='w-full flex items-center justify-center mx-auto'>
+                <p class=" w-fit font-roboto text-center p-1 bg-red-500 text-white">Limit reached (5/5). Delete a card to add another.</a>
+            </div>
+        @endif
         
     </div>
 

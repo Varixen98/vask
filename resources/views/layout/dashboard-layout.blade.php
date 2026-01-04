@@ -39,7 +39,7 @@
                             </div>
                             <div class="w-full flex flex-col p-1 gap-2">
                                 <div>
-                                    <a href="{{url('/dashboard/edit')}}" class="font-roboto hover:font-bold hover:underline transition-all duration-300">Edit Profile</a>
+                                    <a href="{{url('/dashboard/profile/edit')}}" class="font-roboto hover:font-bold hover:underline transition-all duration-300">Edit Profile</a>
                                 </div>
                                 <div>
                                     <a href="{{url('/dashboard/address')}}" class="font-roboto hover:font-bold hover:underline transition-all duration-300">Address</a>

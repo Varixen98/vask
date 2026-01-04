@@ -24,16 +24,17 @@
                     <p class="font-roboto">After deleting your account, you cannot</p>
                 </div>
                 <ul class="w-full flex flex-col gap-2 text-md">
-                    <li>Melihat riwayat pesanan Anda.</li>
-                    <li>Melihat riwayat pesanan Anda.</li>
-                    <li>Melihat riwayat pesanan Anda.</li>
-                    <li>Melihat riwayat pesanan Anda.</li>
-                    <li>Melihat riwayat pesanan Anda.</li>
+                    <li>View your order history.</li>
+                    <li>View your wishlist.</li>
+                    <li>Recover your reward points.</li>
+                    <li>Recover your coupons.</li>
+                    <li>Recover your account when deleted.</li>
                 </ul>
             </div>
 
             <div class="w-full flex justify-center items-center">
-                <button id="delBtn" class="w-[250px] h-10 font-roboto bg-black text-white hover:bg-neutral-800 rounded-md p-1">DELETE</button>
+                <button id="delBtn" class="w-[25%] p-1 bg-black text-white border border-transparent
+                 hover:bg-white hover:text-black hover:border-black transition-all duration-500 font-roboto">Delete</button>
             </div>
         </div>
         
