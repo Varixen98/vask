@@ -10,7 +10,7 @@
 
             {{-- 2. Totebag Detail --}}
             <div class="flex-1">
-                <h3 class="font-roboto font-bold text-xl mb-1">{{ $item->totebag->item_name }}</h3>
+                <a href="{{route("view.detail", $item->totebag->id)}}" class="font-roboto font-bold text-xl mb-1">{{ $item->totebag->item_name }}</a>
                 <p class="text-sm text-gray-500 mb-4">{{ $item->totebag->description }}</p>
 
                 <div class="flex items-center gap-6">

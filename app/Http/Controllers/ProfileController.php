@@ -25,23 +25,15 @@ class ProfileController extends Controller
      */
 
     // view edit profile page
-    public function viewEditForm(){
+    public function viewEditProfileForm(Request $request){
 
-        $user = Auth::user()->load('defaultAddress');
-        $provinces = Province::all();
-
-        $address = $user->defaultAddress;
-
-        $cities = $address ? (City::where('province_id', $address->province_id)->get()) : [];
-        $districts = $address ? (District::where('city_id', $address->city_id)->get()): [];
-
-        return view('profile.edit.index', compact(
-            'user', 'address', 'provinces', 'cities', 'districts'
-        ));
+        $user = $request->user();
+    
+        return view('profile.edit.index', compact('user'));
     }
 
-    // menyoimpan data edit profile
-    public function storeEdit(Request $request){
+    // menyimpan data edit profile
+    public function storeEditProfile(Request $request){
         
         $user = $request->user();
 
@@ -50,15 +42,6 @@ class ProfileController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'in:Male,Female'],
             'phone' => ['required', 'regex:/^[0-9]+$/', 'min:9'],
-
-            // location id
-            'province_id' => ['required', 'exists:provinces,id'],
-            'city_id' => ['required', 'exists:cities,id'],
-            'district_id' => ['required', 'exists:districts,id'],
-
-            // street address
-            'postal_code' => ['required', 'string', 'max:5'],
-            'street_address' => ['required', 'string', 'max:255']
         ]);
 
 
@@ -68,22 +51,6 @@ class ProfileController extends Controller
             'gender' => $new_data['gender'],
             'phone' => $new_data['phone']
         ]);
-
-        Address::updateOrCreate(
-            [
-                'user_id' => $user->id,
-                'is_default' => true
-            ],
-
-            [
-                'street_address' => $new_data['street_address'],
-                'province_id' => $new_data['province_id'],
-                'city_id' => $new_data['city_id'],
-                'postal_code' => $new_data['postal_code'],
-                'district_id' => $new_data['district_id'],
-
-            ]
-        );
         
         return redirect('/dashboard')->with('success', 'successfully update your profile!');
     }
@@ -104,15 +71,34 @@ class ProfileController extends Controller
         return view('profile.address.index', ['addresses' => $addresses]);
     }
 
-    // view address form
-    public function viewAddressEditForm(){
+    // view address addform
+    public function viewAddressAddForm(){
         $provinces = Province::all();
         return view("profile.address.form.index", compact("provinces"));
+    }
+
+    // view address editform
+    public function viewAddressEditForm(Request $request, $address_id){
+
+        // populate provinces options
+        $provinces = Province::all();
+
+        $user = $request->user();
+
+        $address = $user->addresses()->findOrFail($address_id);
+        $cities = City::where('province_id', $address->province_id)->get();
+        $districts = District::where('city_id', $address->city_id)->get();
+
+        return view("profile.address.editForm.index", compact("address", "provinces", "cities", "districts"));
     }
 
     public function storeNewAddress(Request $request){
 
         $user = $request->user();
+        
+        if($user->addresses()->count() >= 5){
+            return redirect("/dashboard/address")->with("Error", "maximum total address reached");
+        }
 
         $newAddress = $request->validate([
             "province_id" => ["required", "exists:provinces,id"],
@@ -133,13 +119,29 @@ class ProfileController extends Controller
 
 
     // delete user address
-    public function destroyAddress(Request $request, $id){
+    public function destroyAddress(Request $request, $address_id){
 
-        $address = $request->user()->addresses()->findOrFail($id);
+        $address = $request->user()->addresses()->findOrFail($address_id);
 
         $address->delete();
 
         return redirect()->back()->with("success", "successfully delete an address");
+    }
+
+
+    // set default address
+    public function setDefaultAddress(Request $request, $address_id){
+
+        $user = $request->user();
+    
+        $address = $user->addresses()->findOrFail($address_id);
+
+        $user->addresses()->where("is_default", 1)->update(['is_default' => 0]);    
+
+        $address->is_default = 1;
+        $address->save();
+
+        return redirect()->back()->with("success", "updated default address");
     }
     
 
@@ -172,6 +174,45 @@ class ProfileController extends Controller
         return redirect()->back()->with('success', 'delete a payment method');
     }
 
+    public function setDefaultPayment(Request $request, $p_methodId){
+        $user = $request->user();
+    
+        $p_method = $user->payments()->findOrFail($p_methodId);
+
+        $user->payments()->where("is_default", 1)->update(['is_default' => 0]);    
+
+        $p_method->is_default = 1;
+        $p_method->save();
+
+        return redirect()->back()->with("success", "updated default payment method");
+    }
+
+    // menyimpan payment method
+    public function storePayment(Request $request){
+
+        $user = $request->user();
+
+        // jika user sudah punya 5 payment method
+        if($user->payments()->count() >=5){
+            return redirect()->route("index.payment.method")->with("Error", "maximum total payment method reached");
+        }
+
+        $request->merge([
+            'card_number' => str_replace(' ', '', $request->input('card_number'))
+        ]);
+
+        $payment = $request->validate([
+            'full_name' => ['required', 'string', 'max:255'],
+            'card_number' => ['required', 'numeric', 'digits:16'],
+            'cvv' => ['required', 'numeric', 'digits:3'],
+            'expire_date' => ['required', 'string', 'size:7']
+        ]);
+
+        $request->user()->payments()->create($payment);
+
+        return redirect()->route('index.payment.method')->with('success', 'payment method created!');
+    }
+
     /**
      * 
      * 
@@ -199,30 +240,8 @@ class ProfileController extends Controller
         return redirect('/')->with('success', 'Account delete!');
     }
 
-    /**
-     * 
-     * 
-     * function for save payment method
-     */
 
-    // menyimpan payment method
-    public function storePayment(Request $request){
-
-        $request->merge([
-            'card_number' => str_replace(' ', '', $request->input('card_number'))
-        ]);
-
-        $payment = $request->validate([
-            'full_name' => ['required', 'string', 'max:255'],
-            'card_number' => ['required', 'numeric', 'digits:16'],
-            'cvv' => ['required', 'numeric', 'digits:3'],
-            'expire_date' => ['required', 'string', 'size:7']
-        ]);
-
-        $request->user()->payments()->create($payment);
-
-        return redirect()->route('index.payment.method')->with('success', 'payment method created!');
-    }
+    
 
 
 
