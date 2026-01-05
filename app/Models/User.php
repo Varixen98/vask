@@ -51,6 +51,10 @@ class User extends Authenticatable
         ];
     }
 
+    public function wishlists(){
+        return $this->hasMany(Wishlist::class);
+    }
+
     public function carts(){
         return $this->hasMany(Cart::class);
     }
@@ -69,5 +73,9 @@ class User extends Authenticatable
 
     public function defaultPayment(){
         return $this->hasOne(Payment::class)->where('is_default', true);
+    }
+
+    public function orders(){
+        return $this->hasMany(Order::class);
     }
 }

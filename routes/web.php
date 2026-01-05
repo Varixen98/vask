@@ -4,8 +4,10 @@ use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudioController;
+use App\Http\Controllers\WishlishController;
 use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -40,15 +42,25 @@ Route::middleware([AuthMiddleware::class])->group(function () {
 
 
     // view cart
-    Route::get("/cart", [CartController::class, "viewCart"]);
-    Route::post("/cart/add/{id}", [CartController::class, "store"])->name("cart.add");
+    Route::get("/cart", [CartController::class, "viewCart"])->name("index.cart");
+    Route::post("detail/cart/add/{id}", [CartController::class, "store"])->name("cart.add");
+    Route::post("studio/cart/add/{id}", [CartController::class, "storeDesign"])->name("design.cart.add");
     Route::delete("/cart/delete/{id}", [CartController::class, "delete"])->name("cart.delete");
+    Route::post("/cart/checkout", [CartController::class, "checkout"])->name("store.checkout");
 
 
 
     // Profile dashboard
     // view dashboard user
     Route::get('/dashboard', [ProfileController::class, 'viewDashboard']); 
+
+    // view order history user
+    Route::get("/dashboard/order", [OrderController::class, "viewOrderHistory"])->name("index.order.history");
+
+    // view wishlist user
+    Route::get("/dashboard/wishlist", [WishlishController::class, "viewWishlist"]);
+    Route::post("/dashboard/wishlist/{id}", [WishlishController::class, "storeWishlist"])->name("store.wishlist");
+    Route::delete("/dashboard/wishlist/{id}", [WishlishController::class, "destroyWishlist"])->name("destroy.wishlist");
 
     // view edit profile form 
     Route::get('/dashboard/profile/edit', [ProfileController::class, 'viewEditProfileForm']);

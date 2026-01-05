@@ -19,5 +19,6 @@
         
         {{-- button to add cart & to studio --}}
         @include("detail.components.button")
+        @include("detail.components.wishlist-button")
     </div>
 </div>

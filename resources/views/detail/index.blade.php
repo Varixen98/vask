@@ -7,6 +7,5 @@
 
         {{-- item detail card --}}
         @include('detail.components.card-item')
-        
     </main>
 @endsection
