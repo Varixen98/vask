@@ -4,10 +4,10 @@
             <div class="w-full flex">
                 <div class="w-3/4 flex flex-col">
 
-                    <div class="flex gap-2">
+                    <div class="flex gap-2 items-center">
                         <span class="font-roboto font-bold">Cardholder</span>
                         <p>{{$payment->full_name}}</p>
-                        <span class="text-xs font-normal text-green-700 bg-green-100 px-1 rounded ml-2">Default</span>
+                        <span class="text-xs font-normal text-green-700x bg-green-100 rounded ml-2 p-1">Default</span>
                     </div>
 
                     <div class="flex gap-2">

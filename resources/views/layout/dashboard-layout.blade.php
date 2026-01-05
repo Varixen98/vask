@@ -25,10 +25,10 @@
                                     <a href="{{url('/dashboard')}}" class="font-roboto hover:font-bold hover:underline transition-all duration-300">Profile</a>
                                 </div>
                                 <div>
-                                    <a href="#" class="font-roboto hover:font-bold hover:underline transition-all duration-300">Order history</a>
+                                    <a href="{{url("/dashboard/order")}}" class="font-roboto hover:font-bold hover:underline transition-all duration-300">Order history</a>
                                 </div>
                                 <div>
-                                    <a href="#" class="font-roboto hover:font-bold hover:underline transition-all duration-300">Wishlist</a>
+                                    <a href="{{url("/dashboard/wishlist")}}" class="font-roboto hover:font-bold hover:underline transition-all duration-300">Wishlist</a>
                                 </div>
                             </div>
                         </div>

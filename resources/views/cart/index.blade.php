@@ -3,7 +3,7 @@
 @section("title", "Cart")
 
 @section('content')
-    <main class="mt-35 w-screen flex flex-col items-center justify-center mb-20">
+    <main class="mt-35 w-full flex flex-col items-center justify-center mb-20">
         <div id="title" class="w-[85%] flex flex-col items-center justify-center px-4">
             <div class="w-[85%] flex flex-col items-center justify-center">
                 <h1 class="w-full font-roboto font-bold text-3xl flex items-start mb-4">Your Shopping Cart</h1>
