@@ -35,7 +35,7 @@
                 </div>
 
                 {{-- button add to cart --}}                
-                <div class="flex px-4 pb-4 pt-2">
+                <div class="w-full flex items-center justify-between px-4 pb-4 pt-2">
                     @include("catalog.components.button-cart")
                 </div>
             </div>
