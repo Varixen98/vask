@@ -18,7 +18,16 @@
         </div>
         
         {{-- button to add cart & to studio --}}
-        @include("detail.components.button")
-        @include("detail.components.wishlist-button")
+        <div class="px-8 mt-6 gap-5 flex flex-col items-center justify-center">
+            <div class="w-full mt-1 gap-5 flex items-center justify-center">
+                @include("detail.components.button-design")
+            </div>
+
+            <div class="flex gap-5">
+                @include("detail.components.button-cart")
+                @include("detail.components.wishlist-button")
+            </div>
+        </div>
+        
     </div>
 </div>

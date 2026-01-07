@@ -1,4 +1,4 @@
-<footer class="site-footer w-full h-auto">
+<footer class="flex items-center justify-center mx-auto w-[85%] h-auto">
 
     <div class="mx-auto p-5 w-full h-auto">
 

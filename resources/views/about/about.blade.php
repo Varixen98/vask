@@ -4,40 +4,28 @@
 @section('title', 'about us')
 
 @section('content')
-    <main class="flex flex-col w-full h-auto mx-auto">
+    <main class="flex items-center justify-center flex-col w-full h-auto mx-auto">
 
         {{-- hero section --}}
-        <div class="flex w-full h-[700px] gap-0 p-2 bg-center bg-cover" style="background-image: url({{asset('images/bg3.webp')}})">
-            <div class="w-1/2 flex flex-col p-5 justify-center items-center gap-2">
-                <h2 class="font-roboto font-bold text-7xl">Why VÄSK?</h2>
-                <p class="font-roboto w-[400px]">With VÄSK customer can design their perfect tote bag with their
-                style combined with our top quality tote bag!
-                </p>
+        <div class="flex items-center justify-center w-full h-[700px] gap-0 p-2 bg-center bg-cover" style="background-image: url({{asset('images/bg3.webp')}})">
+            <div class="w-[85%] grid grid-cols-2 items-center justify-center">
+
+                {{-- hero description --}}
+                <div class=" w-[440px] h-[340px] flex flex-col border border-black p-2 justify-center items-center gap-2 mx-auto">
+                    <h2 class="font-roboto font-bold text-7xl">WHY VÄSK?</h2>
+                    <p class="font-roboto w-[400px]">With VÄSK customer can design their perfect tote bag with their
+                    style combined with our top quality tote bag!
+                    </p>
+                </div>
             </div>
+            
         </div>
 
         {{-- horizontal card 2 --}}
-        <div class="flex w-full px-2 my-20">
-            <div class="w-1/2 flex flex-col p-5 justify-center items-center gap-2">
-                <h3 class="font-roboto text-4xl text-black font-bold">
-                    Quality
-                </h3>
+        @include("about.components.quality-card")
+        
+        @include("about.components.umwelt-card")
 
-                <p class="font-roboto text-black justify-center w-[500px]">
-                    We just keep getting better and better.
-                    We thoroughly vet all of our Print Providers to ensure the absolute best for our customers.
-                    We check for:
-                </p>
-                <ul class="font-roboto list-disc pl-8 w-[500px]">
-                    <li>Product defects</li>
-                    <li>Cancellation rates</li>
-                    <li>Print quality</li>
-                </ul>
-                <p class="font-roboto w-[500px]">
-                    If you are even 1% unsatisfied, we will 100% make sure it gets resolved. Visit our Quality Page to learn more about our standards.
-                </p>
-            </div>
-            <img class="w-[45%]" src="{{asset('images/qa.webp')}}" alt="">
-        </div>
+        @include("about.components.creator-card")
     </main>
 @endsection
