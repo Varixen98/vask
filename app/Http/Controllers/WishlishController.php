@@ -21,6 +21,13 @@ class WishlishController extends Controller
 
         $user = $request->user();
 
+        // check if the totebag is already on wishlist or not
+        $totebag = $user->wishlists()->where("totebag_id", $totebag_id)->exists();
+
+        if($totebag){
+            return back()->with("failed", "totebag is already on wishlist!");
+        }
+
         $wishlist = Wishlist::create([
             "user_id" => $user->id,
             "totebag_id" => $totebag_id
