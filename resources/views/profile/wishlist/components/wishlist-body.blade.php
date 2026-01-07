@@ -1,6 +1,6 @@
 <div class="flex flex-col w-full h-auto items-center justify-center">
 
-    @if($wishlists->count() == 0)
+    @if($wishlists->count() > 0)
         {{-- pagination button --}}
         <div class="w-full flex items-center justify-center z-10 shadow-md pb-5 px-4 rounded-xl">
             {{$wishlists->links()}}
